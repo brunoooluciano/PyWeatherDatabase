@@ -10,11 +10,8 @@ class Main:
     def mainRun(self):
         #instances
         db = Database()       
-        exporta = Extraction()
-        
-        #db.addCityToTableLocals("São José dos Pinhais", "Paraná", "Brasil")
-        
-        apiKey = open("apikey.txt", "r").read()
+        export = Extraction()
+        apiKey = open("apikey.txt", "r").read() 
         db.getCityFromTableLocals()
         for city in db.cityList:
             weather = Weather(city, apiKey)
@@ -23,7 +20,7 @@ class Main:
             db.insertDataToCurrentWeather(weather.city, 
                                           weather.temp, weather.tempMin, weather.tempMax, 
                                           weather.humidity, weather.description)
-        exporta.selectDataFromCurrentWeather()
+        export.selectDataFromCurrentWeather()
         db.closeConnection()
 main = Main()
 main.mainRun()
